@@ -62,6 +62,13 @@
 
 /* Responsivité */
 /* Responsive Styles */
+@media (max-width: 1024px) {
+    .library-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Affiche 4 colonnes */
+        gap: 15px;
+    }
+}
 @media (max-width: 768px) {
     .library-section h2 {
         font-size: 2em;
@@ -84,6 +91,11 @@
 
     .search-bar {
         width: 90%; /* Ajustez la barre de recherche */
+    }
+    .library-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Affiche 4 colonnes */
+        gap: 15px;
     }
 }
 @media (max-width: 600px){

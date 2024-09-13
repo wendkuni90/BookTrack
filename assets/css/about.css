@@ -86,8 +86,11 @@
     flex-direction: column;
     }
     
-    .about-image, .about-content {
+    .about-content {
     width: 100%;
+    }
+    .about-image{
+        display: none;
     }
 }
 

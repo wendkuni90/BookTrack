@@ -1,4 +1,18 @@
+<?php require "includes/student_session.php" ?>
+<?php require "config/config.php" ?>
+<?php
 
+
+    //Recherchons les bibliothèques et les livres de chaque bibliothèque
+    $sql = "SELECT * FROM library";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $libraries = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    //Recherchons les livres de chaque bibliothèque
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -25,8 +39,21 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#book">Books</a></li>
                 <li><a href="#team">Team</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="auth/login.php">Log in</a></li>
+                <?php if(!isset($_SESSION['stu_ine'])): ?>
+                    <li><a href="auth/login.php">Log in</a></li>
+                <?php else: ?>
+                    <li><a href="#borrow">Emprunts</a></li>
+                    <div class="dropdown">
+                        <li class="dropbtn"><?= htmlspecialchars(strtoupper($_SESSION['stu_name'])); ?></li>
+                        <div class="dropdown-content">
+                            <li><a href="#"><?= htmlspecialchars(strtoupper($_SESSION['stu_ine'])); ?></a></li>
+                            <li><a href="scripts/setting.php">Paramètres</a></li>
+                            <li><a href="auth/logout.php">logout</a></li>
+                        </div>
+                    </div>
+                    <li>  </li>
+                    
+                <?php endif; ?>
             </ul>
             <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
         </div>
@@ -84,36 +111,30 @@
             <input type="text" id="search" placeholder="Rechercher un livre..." class="search-bar">
             <div class="filter-buttons">
                 <button class="filter-btn active" data-filter="all">Toutes les Bibliothèques</button>
-                <button class="filter-btn" data-filter="fiction">Fiction</button>
-                <button class="filter-btn" data-filter="non-fiction">Non-Fiction</button>
-                <button class="filter-btn" data-filter="children">Enfants</button>
-                <button class="filter-btn" data-filter="reference">Référence</button>
+                <?php foreach($libraries as $library): ?>
+                    <button class="filter-btn" data-filter="<?= $library['library_id']; ?>"> <?= htmlspecialchars(strtoupper($library['library_name'])); ?> </button>
+                <?php endforeach; ?>
             </div>
             <div class="library-grid">
-                <div class="library-item fiction">
-                    <img src="assets/img/images (7).jpeg" alt="Bibliothèque 1">
-                    <p>Bibliothèque de Fiction</p>
-                </div>
-                <div class="library-item non-fiction">
-                    <img src="assets/img/images (7).jpeg" alt="Bibliothèque 2">
-                    <p>Bibliothèque de Non-Fiction</p>
-                </div>
-                <div class="library-item non-fiction">
-                    <img src="assets/img/images (7).jpeg" alt="Bibliothèque 2">
-                    <p>Bibliothèque de Non-Fiction</p>
-                </div>
-                <div class="library-item children">
-                    <img src="assets/img/images (7).jpeg" alt="Bibliothèque 3">
-                    <p>Bibliothèque pour Enfants</p>
-                </div>
-                <div class="library-item reference">
-                    <img src="assets/img/images (7).jpeg" alt="Bibliothèque 4">
-                    <p>Bibliothèque de Référence</p>
-                </div>
-                <div class="library-item fiction">
-                    <img src="assets/img/images (7).jpeg" alt="Bibliothèque 5">
-                    <p>Bibliothèque de Fiction</p>
-                </div>
+
+                <?php foreach($libraries as $library): ?>
+                    <?php
+                        $id = $library['library_id'];
+                        $sql = "SELECT * FROM book WHERE library_id = ?";
+                        $req = $conn->prepare($sql);
+                        $req->execute([$id]);
+                        $books = $req->fetchAll(PDO::FETCH_ASSOC);
+                    ?>
+                    
+                    <?php foreach($books as $book): ?>
+                        <div class="library-item <?= $library['library_id']; ?>">
+                            <img src="assets/img/images (7).jpeg" alt="Livre 1">
+                            <p style="text-align:left;font-weight:bold;font-size:15px;margin-bottom:0;"><?= htmlspecialchars(strtoupper($book['book_title'])); ?></p>
+                            <p style="text-align:left;font-size:12px;margin-top:0;">Exemplaires disponibles: <?= $book['book_copies']; ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
+        
             </div>
         </section>
 
@@ -129,7 +150,7 @@
                     <h4>Latif NACANABO</h4>
                     <p>FrontEnd</p>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -139,7 +160,7 @@
                     <h4>Eliel NIKIEMA</h4>
                     <p>BackEnd</p>
                     <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
