@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,6 +9,8 @@
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/about.css">
     <link rel="stylesheet" href="assets/css/book.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/team.css">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
 </head>
 <body>
@@ -55,27 +59,27 @@
     
         <section class="about-section" id="about">
             <div class="about-container">
-              <div class="about-image">
-                <img src="assets/img/images (9).jpeg" alt="">
-              </div>
-              <div class="about-content">
-                <div class="about-header">À PROPOS DE NOUS</div>
-                <h2 class="about-title">BookTrack au service de tous les étudiants</h2>
-                <p class="about-description">
-                   BookTrack est un espace de découverte. Depuis notre création, nous nous efforçons 
-                  de fournir des ressources de qualité, un environnement propice à l'apprentissage et des 
-                  services innovants pour soutenir la réussite académique des étudiants.
-                </p>
-                <ul class="about-features">
-                  <li><i class="fas fa-book"></i> Large collection de ressources académiques</li>
-                  <li><i class="fas fa-wifi"></i> Accès à distance aux ressources</li>
-                </ul>
-              </div>
+                <div class="about-image">
+                    <img src="assets/img/images (9).jpeg" alt="">
+                </div>
+                <div class="about-content">
+                    <div class="about-header">À PROPOS DE NOUS</div>
+                    <h2 class="about-title">BookTrack au service de tous les étudiants</h2>
+                    <p class="about-description">
+                    BookTrack est un espace de découverte. Depuis notre création, nous nous efforçons 
+                    de fournir des ressources de qualité, un environnement propice à l'apprentissage et des 
+                    services innovants pour soutenir la réussite académique des étudiants.
+                    </p>
+                    <ul class="about-features">
+                    <li><i class="fas fa-book"></i> Large collection de ressources académiques</li>
+                    <li><i class="fas fa-wifi"></i> Accès à distance aux ressources</li>
+                    </ul>
+                </div>
             </div>
-          </section> 
+        </section> 
 
 
-          <section class="library-section" id="book">
+        <section class="library-section" id="book">
             <h2>Bibliothèques et Livres</h2>
             <input type="text" id="search" placeholder="Rechercher un livre..." class="search-bar">
             <div class="filter-buttons">
@@ -112,11 +116,36 @@
                 </div>
             </div>
         </section>
+
     </section>
 
-       
-
     <footer>
+        <section class="team-section" id="team">
+            <h2>Equipe</h2>
+            <div class="team-grid">
+                
+                <div class="team-member">
+                    <img src="assets/img/téléchargement.jpg" alt="Martin Hill" />
+                    <h4>Latif NACANABO</h4>
+                    <p>FrontEnd</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="assets/img/téléchargement.jpg" alt="Adam Smith" />
+                    <h4>Eliel NIKIEMA</h4>
+                    <p>BackEnd</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
         <p>&copy; 2024 BookTrack. Tous droits réservés.</p>
         <p style="font-size: 10px;">Latif NACANABO & Eliel NIKIEMA</p>
     </footer>   
@@ -125,5 +154,6 @@
     <script src="assets/js/about.js"></script>
     <script src="assets/js/book.js"></script>
     <script src="assets/js/search.js"></script>
+    <script src="assets/js/team.js"></script>
 </body>
 </html>

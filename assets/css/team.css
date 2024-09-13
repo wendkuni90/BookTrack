@@ -1,0 +1,100 @@
+
+
+.team-section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.team-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #e0e0e0;
+}
+
+.team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.team-member {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 220px; /* Largeur par défaut */
+    transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+    transform: scale(1.05); /* Effet de zoom au survol */
+}
+
+.team-member img {
+    width: 100%;
+    height: auto;
+}
+
+.team-member h4 {
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+.team-member p {
+    margin: 0;
+    color: #777;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.social-icons a {
+    color: #333;
+    font-size: 20px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.social-icons a:hover {
+    opacity: 1; /* Augmenter l'opacité au survol */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .team-member {
+        width: 45%; /* Largeur plus grande pour les tablettes */
+    }
+}
+
+@media (max-width: 600px) {
+    .team-member {
+        width: 48%; /* Ajuster pour les petits écrans */
+    }
+}
+
+@media (max-width: 480px) {
+    .team-member {
+        width: 90%; /* Prendre toute la largeur sur mobile */
+    }
+
+    .team-section h2 {
+        font-size: 2em; /* Réduire la taille du titre */
+    }
+
+    .team-member h3 {
+        font-size: 1.3em; /* Réduire la taille du nom */
+    }
+
+    .team-member p {
+        font-size: 0.9em; /* Réduire la taille de la description */
+    }
+
+    .social-icons a {
+        font-size: 18px; /* Ajuster la taille des icônes */
+    }
+}

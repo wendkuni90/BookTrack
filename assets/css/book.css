@@ -61,6 +61,7 @@
 }
 
 /* Responsivité */
+/* Responsive Styles */
 @media (max-width: 768px) {
     .library-section h2 {
         font-size: 2em;
@@ -72,5 +73,44 @@
 
     .library-item p {
         font-size: 1em;
+    }
+    .library-grid {
+        justify-content: center;
+    }
+
+    .library-item {
+        width: 80%; /* Largeur plus grande sur mobile */
+    }
+
+    .search-bar {
+        width: 90%; /* Ajustez la barre de recherche */
+    }
+}
+@media (max-width: 600px){
+    .library-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Affiche 4 colonnes */
+        gap: 15px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .library-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr); /* Affiche 4 colonnes */
+        gap: 15px;
+    }
+    .library-section h2 {
+        font-size: 1.5em; /* Réduisez la taille du titre */
+    }
+
+    .filter-btn {
+        padding: 8px 10px; /* Ajustez le padding des boutons */
+        font-size: 0.9em; /* Réduisez la taille du texte */
+    }
+
+    .library-item {
+        width: 100%; /* Prendre toute la largeur sur les très petits écrans */
     }
 }

@@ -64,8 +64,7 @@ nav {
     display: none;
 }
 .search-bar {
-    width: 100%;
-    max-width: 400px; /* Largeur max de la barre de recherche */
+    width: 70%; /* Largeur max de la barre de recherche */
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #6200ea;
@@ -110,7 +109,7 @@ nav {
         max-width: 350px;
         top: 0;
         left: -100%;
-        background: #2092fd62; /* Couleur bleue */
+        background: #303030; /* Couleur bleue */
         display: block;
         padding: 50px 10px;
         line-height: 50px;
