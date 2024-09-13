@@ -9,8 +9,34 @@
     $stmt->execute();
     $libraries = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    //Recherchons les livres de chaque bibliothèque
+    //Recherchons les empruntsen cours, retard et retourné
+    //En cours
+    $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_return, b.borrow_status, b.borrow_return
+            FROM borrow b
+            JOIN student s ON s.student_id = b.student_id
+            JOIN book bk ON bk.book_id = b.book_id
+            WHERE b.borrow_status = 'En cours' AND s.student_ine = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$_SESSION['stu_ine']]);
+    $cours = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_return, b.borrow_status, b.borrow_return
+            FROM borrow b
+            JOIN student s ON s.student_id = b.student_id
+            JOIN book bk ON bk.book_id = b.book_id
+            WHERE b.borrow_status = 'Retourné' AND s.student_ine = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$_SESSION['stu_ine']]);
+    $retours = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_return, b.borrow_status, b.borrow_return
+            FROM borrow b
+            JOIN student s ON s.student_id = b.student_id
+            JOIN book bk ON bk.book_id = b.book_id
+            WHERE b.borrow_status = 'Retard' AND s.student_ine = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$_SESSION['stu_ine']]);
+    $retards = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -42,7 +68,7 @@
                 <?php if(!isset($_SESSION['stu_ine'])): ?>
                     <li><a href="auth/login.php">Log in</a></li>
                 <?php else: ?>
-                    <li><a href="#borrow">Emprunts</a></li>
+                    <li><a href="#borrow">Mes Emprunts</a></li>
                     <div class="dropdown">
                         <li class="dropbtn"><?= htmlspecialchars(strtoupper($_SESSION['stu_name'])); ?></li>
                         <div class="dropdown-content">
@@ -128,15 +154,36 @@
                     
                     <?php foreach($books as $book): ?>
                         <div class="library-item <?= $library['library_id']; ?>">
-                            <img src="assets/img/images (7).jpeg" alt="Livre 1">
+                            <img src="assets/img/images (12).jpeg" alt="Livre 1">
                             <p style="text-align:left;font-weight:bold;font-size:15px;margin-bottom:0;"><?= htmlspecialchars(strtoupper($book['book_title'])); ?></p>
-                            <p style="text-align:left;font-size:12px;margin-top:0;">Exemplaires disponibles: <?= $book['book_copies']; ?></p>
+                            <p style="text-align:left;font-size:12px;margin-top:0;">Exemplaires disponible: <?= $book['book_copies']; ?></p>
                         </div>
                     <?php endforeach; ?>
                 <?php endforeach; ?>
         
             </div>
         </section>
+        
+        <?php if(isset($_SESSION['stu_ine'])): ?>
+            <section class="borrow-section" id="borrow">
+
+                <p>En cours</p>
+                <?php foreach($cours as $cour): ?>
+                    <p> <?= $cour['student_name']; ?> <?= $cour['book_title']; ?> </p>
+                <?php endforeach; ?>
+                <p>En retard</p>
+                <?php foreach($retards as $retard): ?>
+                    <p> <?= $retard['student_name']; ?> <?= $retard['book_title']; ?> </p>
+                <?php endforeach; ?>
+                <p>Retourné</p>
+                <?php foreach($retours as $retour): ?>
+                    <p> <?= $retour['student_name']; ?> <?= $retour['book_title']; ?> </p>
+                <?php endforeach; ?>
+
+                <!-- Il ne reste plus qu'à styliser la section des emprunts, sinon ça marche -->
+                <!-- Il reste aussi la partie de forgot password et le tour est joué -->
+            </section>
+        <?php endif; ?>
 
     </section>
 
