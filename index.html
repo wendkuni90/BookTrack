@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="assets/css/style.css?v=1.0">
     <link rel="stylesheet" href="assets/css/home.css">
     <link rel="stylesheet" href="assets/css/about.css">
+    <link rel="stylesheet" href="assets/css/book.css">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
 </head>
 <body>
@@ -18,7 +19,7 @@
                 <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#books">Books</a></li>
+                <li><a href="#book">Books</a></li>
                 <li><a href="#team">Team</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="auth/login.php">Log in</a></li>
@@ -72,6 +73,45 @@
               </div>
             </div>
           </section> 
+
+
+          <section class="library-section" id="book">
+            <h2>Bibliothèques et Livres</h2>
+            <input type="text" id="search" placeholder="Rechercher un livre..." class="search-bar">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Toutes les Bibliothèques</button>
+                <button class="filter-btn" data-filter="fiction">Fiction</button>
+                <button class="filter-btn" data-filter="non-fiction">Non-Fiction</button>
+                <button class="filter-btn" data-filter="children">Enfants</button>
+                <button class="filter-btn" data-filter="reference">Référence</button>
+            </div>
+            <div class="library-grid">
+                <div class="library-item fiction">
+                    <img src="assets/img/images (7).jpeg" alt="Bibliothèque 1">
+                    <p>Bibliothèque de Fiction</p>
+                </div>
+                <div class="library-item non-fiction">
+                    <img src="assets/img/images (7).jpeg" alt="Bibliothèque 2">
+                    <p>Bibliothèque de Non-Fiction</p>
+                </div>
+                <div class="library-item non-fiction">
+                    <img src="assets/img/images (7).jpeg" alt="Bibliothèque 2">
+                    <p>Bibliothèque de Non-Fiction</p>
+                </div>
+                <div class="library-item children">
+                    <img src="assets/img/images (7).jpeg" alt="Bibliothèque 3">
+                    <p>Bibliothèque pour Enfants</p>
+                </div>
+                <div class="library-item reference">
+                    <img src="assets/img/images (7).jpeg" alt="Bibliothèque 4">
+                    <p>Bibliothèque de Référence</p>
+                </div>
+                <div class="library-item fiction">
+                    <img src="assets/img/images (7).jpeg" alt="Bibliothèque 5">
+                    <p>Bibliothèque de Fiction</p>
+                </div>
+            </div>
+        </section>
     </section>
 
        
@@ -83,6 +123,7 @@
     
     <script src="assets/js/home.js"></script>
     <script src="assets/js/about.js"></script>
-    
+    <script src="assets/js/book.js"></script>
+    <script src="assets/js/search.js"></script>
 </body>
 </html>

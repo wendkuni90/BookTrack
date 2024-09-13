@@ -76,12 +76,21 @@
     max-width: 600px;
 }
 
-.image-item img {
+/* .image-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
     transition: transform 0.3s ease;
+} */
+.image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    opacity: 0; /* Initialement caché */
+    transform: translateY(20px); /* Décalage vers le bas */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Animation douce */
 }
 
 .image-item img:hover {
