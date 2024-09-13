@@ -1,0 +1,145 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    background-color: #2092fda6;
+    color: white;
+    height: 50px; /* Hauteur de la barre de navigation */
+    display: flex;
+    align-items: center; /* Centrage vertical */
+    padding: 0 20px; /* Padding horizontal */
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo img {
+    height: 150px; /* Limite la hauteur maximale pour s'adapter à la barre */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 0 10px; /* Espacement entre les liens */
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ffeb3b;
+}
+
+.btn {
+    display: none;
+    cursor: pointer;
+}
+
+#menu-btn {
+    display: none;
+}
+
+#close-btn {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .presentation h2 {
+        font-size: 28px;
+    }
+
+    .presentation p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .presentation h2 {
+        font-size: 24px;
+    }
+
+    .presentation p {
+        font-size: 14px;
+    }
+}
+
+
+@media screen and (max-width: 970px) {
+    .wrapper .btn {
+        display: block;
+    }
+    .wrapper .nav-links {
+        position: fixed;
+        height: 100vh;
+        width: 100%;
+        max-width: 350px;
+        top: 0;
+        left: -100%;
+        background: #2092fd62; /* Couleur bleue */
+        display: block;
+        padding: 50px 10px;
+        line-height: 50px;
+        overflow-y: auto;
+        box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.18);
+        transition: left 0.3s ease;
+    }
+    #menu-btn:checked ~ .nav-links {
+        left: 0;
+    }
+    #close-btn:checked ~ .nav-links {
+        left: -100%;
+    }
+    .nav-links li {
+        margin: 15px 0;
+    }
+    .nav-links li a {
+        font-size: 20px;
+        display: block;
+    }
+}
+
+.presentation {
+    flex: 1;
+    background-color: #fff;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrage vertical */
+    justify-content: center; /* Centrage horizontal */
+}
+
+footer {
+    bottom: 0;
+    text-align: center;
+    padding: 10px;
+    background-color: #1c1c1d;
+    color: #ffffffb7;
+}
+
+footer p {
+    margin: 0;
+    font-size: 12px;
+}

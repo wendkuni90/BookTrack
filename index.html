@@ -1,1 +1,88 @@
-Nothing
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>BookTrack</title> 
+    <link rel="stylesheet" href="assets/css/style.css?v=1.0">
+    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/about.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+</head>
+<body>
+    <nav>
+        <div class="wrapper">
+            <div class="logo"><img src="assets/img/logo_200.png" alt=""></div>
+            <input type="radio" name="slider" id="menu-btn">
+            <input type="radio" name="slider" id="close-btn">
+            <ul class="nav-links">
+                <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#books">Books</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="auth/login.php">Log in</a></li>
+            </ul>
+            <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+        </div>
+    </nav>
+
+    <section class="presentation">
+        <section class="home-section" id="home">
+            <div class="container">
+                <div class="welcome-text">Bienvenue sur BookTrack</div>
+                <h1 class="main-title">
+                    <span class="book">Gérez</span> votre 
+                    <span class="track">Bibliothèque</span> 
+                    <span class="highlight">en toute simplicité</span>
+                </h1>
+                <p class="description">
+                    BookTrack révolutionne la gestion de votre bibliothèque universitaire. 
+                    Simplifiez les emprunts, suivez vos livres en temps réel, et offrez 
+                    une expérience fluide aux étudiants.
+                </p>
+            </div>
+            <div class="image-grid">
+                <div class="image-item"><img src="assets/img/images.jpeg" alt="Book 1"></div>
+                <div class="image-item"><img src="assets/img/images (12).jpeg" alt="Library 1"></div>
+                <div class="image-item"><img src="assets/img/images (1).jpeg" alt="Book 2"></div>
+                <div class="image-item"><img src="assets/img/images (10).jpeg" alt="Library 2"></div>
+                <div class="image-item"><img src="assets/img/images (3).jpeg" alt="Book 3"></div>
+                <div class="image-item"><img src="assets/img/images (4).jpeg" alt="Book 3"></div>
+            </div>
+        </section>
+    
+        <section class="about-section" id="about">
+            <div class="about-container">
+              <div class="about-image">
+                <img src="assets/img/images (9).jpeg" alt="">
+              </div>
+              <div class="about-content">
+                <div class="about-header">À PROPOS DE NOUS</div>
+                <h2 class="about-title">BookTrack au service de tous les étudiants</h2>
+                <p class="about-description">
+                   BookTrack est un espace de découverte. Depuis notre création, nous nous efforçons 
+                  de fournir des ressources de qualité, un environnement propice à l'apprentissage et des 
+                  services innovants pour soutenir la réussite académique des étudiants.
+                </p>
+                <ul class="about-features">
+                  <li><i class="fas fa-book"></i> Large collection de ressources académiques</li>
+                  <li><i class="fas fa-wifi"></i> Accès à distance aux ressources</li>
+                </ul>
+              </div>
+            </div>
+          </section> 
+    </section>
+
+       
+
+    <footer>
+        <p>&copy; 2024 BookTrack. Tous droits réservés.</p>
+        <p style="font-size: 10px;">Latif NACANABO & Eliel NIKIEMA</p>
+    </footer>   
+    
+    <script src="assets/js/home.js"></script>
+    <script src="assets/js/about.js"></script>
+    
+</body>
+</html>
