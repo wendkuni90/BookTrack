@@ -47,7 +47,7 @@ Notons que si la session du bibliothécaire est lancée il ne peux plus avoir
         if(empty($_POST['ine']) OR empty($_POST['mail'])){
             echo "<script>alert('Attention: Un des champs est vide.')</script>";
         } else {
-            $ine = trim($_POST['ine']);
+            $ine = $_POST['ine'];
             $mail = strtolower($_POST['mail']);
 
             //Requete preparée
@@ -59,14 +59,15 @@ Notons que si la session du bibliothécaire est lancée il ne peux plus avoir
             $fetch = $stmt->fetch(PDO::FETCH_ASSOC);
 
             //Vlidation du mail
-            if($fetch && $mail == strtolower($fetch['student_mail'])){
+            if($fetch && $mail === $fetch['student_mail']){
                  // Création du mot de passe et hachage. Ce mot de passe est unique
                 $aleatPassword = generateUniquePass($conn);
                 $hashed_pass = password_hash($aleatPassword, PASSWORD_DEFAULT);
-                $sql = "UPDATE student SET student_pass = :pass WHERE student_ine = :ine";
+                $sql = "UPDATE student SET student_pass = :pass WHERE student_id = :id";
                 $update = $conn->prepare($sql);         
                 $update->bindParam(':pass', $hashed_pass);
-                $update->bindParam(':ine', $ine);
+                $update->bindParam(':id', $fetch['student_id']);
+                $update->execute();
 
                 //Le mot de passe est mis à jour maintenant envoyons le nouveau mot de passe sur le mail
                 $student_name = strtoupper($fetch['student_name']);
