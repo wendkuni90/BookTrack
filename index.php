@@ -11,32 +11,35 @@
 
     //Recherchons les empruntsen cours, retard et retourné
     //En cours
-    $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_return, b.borrow_status, b.borrow_return
-            FROM borrow b
-            JOIN student s ON s.student_id = b.student_id
-            JOIN book bk ON bk.book_id = b.book_id
-            WHERE b.borrow_status = 'En cours' AND s.student_ine = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$_SESSION['stu_ine']]);
-    $cours = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if(isset($_SESSION['stu_ine'])){
+        $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_return, b.borrow_status, b.borrow_return
+                FROM borrow b
+                JOIN student s ON s.student_id = b.student_id
+                JOIN book bk ON bk.book_id = b.book_id
+                WHERE b.borrow_status = 'En cours' AND s.student_ine = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$_SESSION['stu_ine']]);
+        $cours = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_return, b.borrow_status, b.borrow_return
-            FROM borrow b
-            JOIN student s ON s.student_id = b.student_id
-            JOIN book bk ON bk.book_id = b.book_id
-            WHERE b.borrow_status = 'Retourné' AND s.student_ine = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$_SESSION['stu_ine']]);
-    $retours = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_return, b.borrow_status, b.borrow_return
+                FROM borrow b
+                JOIN student s ON s.student_id = b.student_id
+                JOIN book bk ON bk.book_id = b.book_id
+                WHERE b.borrow_status = 'Retourné' AND s.student_ine = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$_SESSION['stu_ine']]);
+        $retours = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_return, b.borrow_status, b.borrow_return
-            FROM borrow b
-            JOIN student s ON s.student_id = b.student_id
-            JOIN book bk ON bk.book_id = b.book_id
-            WHERE b.borrow_status = 'Retard' AND s.student_ine = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$_SESSION['stu_ine']]);
-    $retards = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_return, b.borrow_status, b.borrow_return
+                FROM borrow b
+                JOIN student s ON s.student_id = b.student_id
+                JOIN book bk ON bk.book_id = b.book_id
+                WHERE b.borrow_status = 'Retard' AND s.student_ine = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$_SESSION['stu_ine']]);
+        $retards = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
 ?>
 
@@ -73,7 +76,7 @@
                         <li class="dropbtn"><?= htmlspecialchars(strtoupper($_SESSION['stu_name'])); ?></li>
                         <div class="dropdown-content">
                             <li><a href="#"><?= htmlspecialchars(strtoupper($_SESSION['stu_ine'])); ?></a></li>
-                            <li><a href="scripts/setting.php">Paramètres</a></li>
+                            <li><a href="scripts/setting.php">Profil</a></li>
                             <li><a href="auth/logout.php">logout</a></li>
                         </div>
                     </div>
