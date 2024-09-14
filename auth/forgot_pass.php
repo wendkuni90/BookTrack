@@ -8,9 +8,39 @@ Notons que si la session du bibliothécaire est lancée il ne peux plus avoir
 
 <?php 
 
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    require 'vendor/autoload.php';
+
     if(isset($_SESSION['stu_ine'])){
         header("location: ../");
         exit();
+    }
+
+   //Creons un mot de passe unique et aléatoire pour l'etudiant
+    function generateUniquePass($conn){
+        $char = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOOPQRSTUVWXYZ';
+        $charLength = strlen($char);
+        do{
+            $randomString = '';
+            for($i = 0; $i < 8; $i++){
+                $randomString .= $char[rand(0,$charLength-1)];
+            }
+
+            //Verifions si le mot de passe existe déjà
+            $stmt = $conn->prepare("SELECT student_pass FROM student");
+            $stmt->execute();
+            $students = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            $exists = 0;
+            foreach($students as $student){
+                if(password_verify($randomString, $student['student_pass'])){
+                    $exists = 1;
+                }
+            }
+        } while ( $exists == 1 ); //Continuer à générer si on rencontre un mm mot de passe existant
+
+        return $randomString;
     }
 
     if(isset($_POST['submit'])){
@@ -30,7 +60,43 @@ Notons que si la session du bibliothécaire est lancée il ne peux plus avoir
 
             //Vlidation du mail
             if($fetch && $mail == strtolower($fetch['student_mail'])){
-                
+                 // Création du mot de passe et hachage. Ce mot de passe est unique
+                $aleatPassword = generateUniquePass($conn);
+                $hashed_pass = password_hash($aleatPassword, PASSWORD_DEFAULT);
+                $sql = "UPDATE student SET student_pass = :pass WHERE student_ine = :ine";
+                $update = $conn->prepare($sql);         
+                $update->bindParam(':pass', $hashed_pass);
+                $update->bindParam(':ine', $ine);
+
+                //Le mot de passe est mis à jour maintenant envoyons le nouveau mot de passe sur le mail
+                $student_name = strtoupper($fetch['student_name']);
+                $student_mail = $mail;
+                $mailer = new PHPMailer(true);
+
+                try{
+                    $mailer->isSMTP();
+                    $mailer->Host = 'smtp.gmail.com';
+                    $mailer->SMTPAuth = true;
+                    $mailer->Username = 'booktrack.team@gmail.com';
+                    $mailer->Password = 'swuiaruroyezulpz';
+                    $mailer->SMTPSecure = 'ssl';
+                    $mailer->Port = 465;
+                    $mailer->setFrom('booktrack.team@gmail.com', 'BookTrack');
+                    $mailer->addAddress($student_mail, $student_name);
+                    $mailer->isHTML(true);
+                    $mailer->Subject = 'Nouveau mot de passe';
+                    $mailer->Body = "Bonjour $student_name,<br><br>Vos nouvelles informations de connexion sur la plateforme sont:<br>INE: <strong>$ine</strong>,<br>Mot de passe: <strong>$aleatPassword</strong>. <br><br>Cordialement, l'équipe de BookTrack.";
+                    $mailer->AltBody = "Bonjour <strong>$student_name</strong>,\n\nVos nouvelles informations de connexion sur la plateforme sont:\nINE: $ine,\nMot de passe: $aleatPassword. \n\nCordialement, l'équipe de BookTrack.";
+
+                    $mailer->send();
+                    header("location: login.php");
+                    exit();
+                } catch (Exception $e) {
+                    $error_message = "Mot de passe changé mais Email non envoyé!";
+                }
+
+            } else {
+                $error_message = "Données incorrectes.";
             }
         }
     }
@@ -57,7 +123,7 @@ Notons que si la session du bibliothécaire est lancée il ne peux plus avoir
                 </div>
                 <div class="textbox">
                     <input type="email" name="mail" required>
-                    <span class="placeholder">Mot de passe</span>
+                    <span class="placeholder">EMAIL</span>
                 </div>
                 
                 <?php if (!empty($error_message)): ?>
