@@ -54,7 +54,8 @@
     <link rel="stylesheet" href="assets/css/book.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="assets/css/team.css">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+    <link rel="stylesheet" href="assets/css/borrow.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <nav>
@@ -169,19 +170,27 @@
         
         <?php if(isset($_SESSION['stu_ine'])): ?>
             <section class="borrow-section" id="borrow">
-
-                <p>En cours</p>
-                <?php foreach($cours as $cour): ?>
-                    <p> <?= $cour['student_name']; ?> <?= $cour['book_title']; ?> </p>
-                <?php endforeach; ?>
-                <p>En retard</p>
+            <h2>Mes emprunts</h2>
+            <div class="emprunt-section">
+                 <h3>Emprunts en Cours</h3>
+                 <?php foreach($cours as $cour): ?>
+                    <div class="emprunt-card en-retard" style="text-transform:uppercase;"> <?= htmlspecialchars($cour['student_name']); ?> | <?= htmlspecialchars($cour['book_title']); ?> </div>
+                 <?php endforeach; ?>
+            </div>
+            <div class="emprunt-section">
+                <h3>Emprunts en Retard</h3>
                 <?php foreach($retards as $retard): ?>
-                    <p> <?= $retard['student_name']; ?> <?= $retard['book_title']; ?> </p>
+                    <div class="emprunt-card en-retard" style="text-transform:uppercase;"> <?= htmlspecialchars($retard['student_name']); ?> | <?= htmlspecialchars($retard['book_title']); ?> </div>
                 <?php endforeach; ?>
-                <p>Retourné</p>
-                <?php foreach($retours as $retour): ?>
-                    <p> <?= $retour['student_name']; ?> <?= $retour['book_title']; ?> </p>
+            </div>
+               
+            <div class="emprunt-section">
+                <h3>Emprunts Retournés</h3>
+                 <?php foreach($retours as $retour): ?>
+                    <div class="emprunt-card en-retard" style="text-transform:uppercase;"> <?= htmlspecialchars($retour['student_name']); ?> | <?= htmlspecialchars($retour['book_title']); ?> </div>
                 <?php endforeach; ?>
+            </div>
+                
 
                 <!-- Il ne reste plus qu'à styliser la section des emprunts, sinon ça marche -->
                 <!-- Il reste aussi la partie de forgot password et le tour est joué -->
