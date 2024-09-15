@@ -43,16 +43,21 @@
     </nav>
 
     <section class="presentation"> 
-
-        <section class="footer-section" style="display:flex;flex-direction:column;">
-            <!-- Ici on va afficher le profil uniquement y'aura pas de possibilité de modification -->
-            <label for="ine">INE</label>
-            <input type="text" id="ine" value=" <?= htmlspecialchars(strtoupper($_SESSION['stu_ine'])); ?> " readonly>
-            <label for="ine">Nom</label>
-            <input type="text" id="name" value=" <?= htmlspecialchars(strtoupper($_SESSION['stu_name'])); ?> " readonly>
-            <label for="ine">Bibliothèque</label>
-            <input type="text" id="lib" value=" <?= htmlspecialchars(strtoupper($library['library_name'])); ?> " readonly>
-        </section>
+        <h2>Profil</h2>
+        <table class="student-table">
+            <tr>
+                <th>INE</th>
+                <td><?= htmlspecialchars(strtoupper($_SESSION['stu_ine'])); ?></td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td> <?= htmlspecialchars(strtoupper($_SESSION['stu_name'])); ?></td>
+            </tr>
+            <tr>
+                <th>Bibliothèque</th>
+                <td><?= htmlspecialchars(strtoupper($library['library_name'])); ?></td>
+            </tr>
+        </table>
 
     </section>
 

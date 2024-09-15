@@ -174,20 +174,20 @@
             <div class="emprunt-section">
                  <h3>Emprunts en Cours</h3>
                  <?php foreach($cours as $cour): ?>
-                    <div class="emprunt-card en-retard" style="text-transform:uppercase;"> <?= htmlspecialchars($cour['student_name']); ?> | <?= htmlspecialchars($cour['book_title']); ?> </div>
+                    <div class="emprunt-card en-retard" style="text-transform:capitalize;"> <?= htmlspecialchars($cour['student_name']); ?> | <?= htmlspecialchars($cour['book_title']); ?> </div>
                  <?php endforeach; ?>
             </div>
             <div class="emprunt-section">
                 <h3>Emprunts en Retard</h3>
                 <?php foreach($retards as $retard): ?>
-                    <div class="emprunt-card en-retard" style="text-transform:uppercase;"> <?= htmlspecialchars($retard['student_name']); ?> | <?= htmlspecialchars($retard['book_title']); ?> </div>
+                    <div class="emprunt-card en-retard" style="text-transform:capitalize;"> <?= htmlspecialchars($retard['student_name']); ?> | <?= htmlspecialchars($retard['book_title']); ?> </div>
                 <?php endforeach; ?>
             </div>
                
             <div class="emprunt-section">
                 <h3>Emprunts Retournés</h3>
                  <?php foreach($retours as $retour): ?>
-                    <div class="emprunt-card en-retard" style="text-transform:uppercase;"> <?= htmlspecialchars($retour['student_name']); ?> | <?= htmlspecialchars($retour['book_title']); ?> </div>
+                    <div class="emprunt-card en-retard" style="text-transform:capitalize;"> <?= htmlspecialchars($retour['student_name']); ?> | <?= htmlspecialchars($retour['book_title']); ?> </div>
                 <?php endforeach; ?>
             </div>
                 
