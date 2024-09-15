@@ -12,7 +12,7 @@
     //Recherchons les empruntsen cours, retard et retourné
     //En cours
     if(isset($_SESSION['stu_ine'])){
-        $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_return, b.borrow_status, b.borrow_return
+        $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_date, b.borrow_status, b.borrow_return
                 FROM borrow b
                 JOIN student s ON s.student_id = b.student_id
                 JOIN book bk ON bk.book_id = b.book_id
@@ -21,7 +21,7 @@
         $stmt->execute([$_SESSION['stu_ine']]);
         $cours = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_return, b.borrow_status, b.borrow_return
+        $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_date, b.borrow_status, b.borrow_return
                 FROM borrow b
                 JOIN student s ON s.student_id = b.student_id
                 JOIN book bk ON bk.book_id = b.book_id
@@ -30,7 +30,7 @@
         $stmt->execute([$_SESSION['stu_ine']]);
         $retours = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_return, b.borrow_status, b.borrow_return
+        $sql = "SELECT b.borrow_id, s.student_name, bk.book_title, b.borrow_date, b.borrow_status, b.borrow_return
                 FROM borrow b
                 JOIN student s ON s.student_id = b.student_id
                 JOIN book bk ON bk.book_id = b.book_id
@@ -172,22 +172,31 @@
             <section class="borrow-section" id="borrow">
             <h2>Mes emprunts</h2>
             <div class="emprunt-section">
-                 <h3>Emprunts en Cours</h3>
-                 <?php foreach($cours as $cour): ?>
-                    <div class="emprunt-card en-retard" style="text-transform:capitalize;"> <?= htmlspecialchars($cour['student_name']); ?> | <?= htmlspecialchars($cour['book_title']); ?> </div>
-                 <?php endforeach; ?>
+                <h3>Emprunts en Cours</h3>
+                <?php foreach($cours as $cour): ?>
+                    <div class="emprunt-card en-retard" style="text-transform:capitalize;"> 
+                        <?= htmlspecialchars($cour['student_name']); ?> | <?= htmlspecialchars($cour['book_title']); ?> <br>
+                        <?= htmlspecialchars($cour['borrow_date']); ?> | <?= htmlspecialchars($cour['borrow_return']); ?>
+                    </div>
+                <?php endforeach; ?>
             </div>
             <div class="emprunt-section">
                 <h3>Emprunts en Retard</h3>
                 <?php foreach($retards as $retard): ?>
-                    <div class="emprunt-card en-retard" style="text-transform:capitalize;"> <?= htmlspecialchars($retard['student_name']); ?> | <?= htmlspecialchars($retard['book_title']); ?> </div>
+                    <div class="emprunt-card en-retard" style="text-transform:capitalize;"> 
+                        <?= htmlspecialchars($retard['student_name']); ?> | <?= htmlspecialchars($retard['book_title']); ?> <br>
+                        <?= htmlspecialchars($retard['borrow_date']); ?> | <?= htmlspecialchars($retard['borrow_return']); ?> 
+                    </div>
                 <?php endforeach; ?>
             </div>
-               
+            
             <div class="emprunt-section">
                 <h3>Emprunts Retournés</h3>
-                 <?php foreach($retours as $retour): ?>
-                    <div class="emprunt-card en-retard" style="text-transform:capitalize;"> <?= htmlspecialchars($retour['student_name']); ?> | <?= htmlspecialchars($retour['book_title']); ?> </div>
+                <?php foreach($retours as $retour): ?>
+                    <div class="emprunt-card en-retard" style="text-transform:capitalize;">
+                        <?= htmlspecialchars($retour['student_name']); ?> | <?= htmlspecialchars($retour['book_title']); ?> <br>
+                        <?= htmlspecialchars($retour['borrow_date']); ?> | <?= htmlspecialchars($retour['borrow_return']); ?>
+                    </div>
                 <?php endforeach; ?>
             </div>
                 
