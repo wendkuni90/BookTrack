@@ -214,7 +214,7 @@
             <div class="team-grid">
                 
                 <div class="team-member">
-                    <img src="assets/img/téléchargement.jpg" alt="Martin Hill" />
+                    <img src="assets/img/téléchargement.jpg" alt="Latif NACANABO" />
                     <h4>Latif NACANABO</h4>
                     <p>FrontEnd</p>
                     <div class="social-icons">
@@ -224,7 +224,7 @@
                     </div>
                 </div>
                 <div class="team-member">
-                    <img src="assets/img/téléchargement.jpg" alt="Adam Smith" />
+                    <img src="assets/img/1000213049-removebg-preview.png" alt="Eliel NIKIEMA" />
                     <h4>Eliel NIKIEMA</h4>
                     <p>BackEnd</p>
                     <div class="social-icons">
