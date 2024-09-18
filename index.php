@@ -16,7 +16,8 @@
                 FROM borrow b
                 JOIN student s ON s.student_id = b.student_id
                 JOIN book bk ON bk.book_id = b.book_id
-                WHERE b.borrow_status = 'En cours' AND s.student_ine = ?";
+                WHERE b.borrow_status = 'En cours' AND s.student_ine = ?
+                ORDER BY b.borrow_date DESC";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$_SESSION['stu_ine']]);
         $cours = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -25,7 +26,9 @@
                 FROM borrow b
                 JOIN student s ON s.student_id = b.student_id
                 JOIN book bk ON bk.book_id = b.book_id
-                WHERE b.borrow_status = 'Retourné' AND s.student_ine = ?";
+                WHERE b.borrow_status = 'Retourné' AND s.student_ine = ?
+                ORDER BY b.borrow_return DESC
+                LIMIT 9";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$_SESSION['stu_ine']]);
         $retours = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -34,7 +37,8 @@
                 FROM borrow b
                 JOIN student s ON s.student_id = b.student_id
                 JOIN book bk ON bk.book_id = b.book_id
-                WHERE b.borrow_status = 'Retard' AND s.student_ine = ?";
+                WHERE b.borrow_status = 'Retard' AND s.student_ine = ?
+                ORDER BY b.borrow_return DESC";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$_SESSION['stu_ine']]);
         $retards = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -170,35 +174,41 @@
         
         <?php if(isset($_SESSION['stu_ine'])): ?>
             <section class="borrow-section" id="borrow">
-            <h2>Mes emprunts</h2>
-            <div class="emprunt-section">
-                <h3>Emprunts en Cours</h3>
-                <?php foreach($cours as $cour): ?>
-                    <div class="emprunt-card en-retard" style="text-transform:capitalize;"> 
-                        <?= htmlspecialchars($cour['student_name']); ?> | <?= htmlspecialchars($cour['book_title']); ?> <br>
-                        <?= htmlspecialchars($cour['borrow_date']); ?> | <?= htmlspecialchars($cour['borrow_return']); ?>
+                <h2>Mes emprunts</h2>
+                <div class="emprunt-section">
+                    <h3 style="color:red;">Emprunts en Retards</h3>
+                    <div class="emprunt-grid">
+                        <?php foreach($retards as $retard): ?>
+                            <div class="emprunt-card en-retard" style="text-transform:capitalize;"> 
+                                <?= htmlspecialchars($retard['student_name']); ?> | <?= htmlspecialchars($retard['book_title']); ?> <br>
+                                <?= htmlspecialchars($retard['borrow_date']); ?> | <?= htmlspecialchars($retard['borrow_return']); ?>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
-            </div>
-            <div class="emprunt-section">
-                <h3>Emprunts en Retard</h3>
-                <?php foreach($retards as $retard): ?>
-                    <div class="emprunt-card en-retard" style="text-transform:capitalize;"> 
-                        <?= htmlspecialchars($retard['student_name']); ?> | <?= htmlspecialchars($retard['book_title']); ?> <br>
-                        <?= htmlspecialchars($retard['borrow_date']); ?> | <?= htmlspecialchars($retard['borrow_return']); ?> 
+                </div>
+                <div class="emprunt-section">
+                    <h3 style="color:blue;">Emprunts en Cours</h3>
+                    <div class="emprunt-grid">
+                        <?php foreach($cours as $cour): ?>
+                            <div class="emprunt-card en-cours" style="text-transform:capitalize;"> 
+                                <?= htmlspecialchars($cour['student_name']); ?> | <?= htmlspecialchars($cour['book_title']); ?> <br>
+                                <?= htmlspecialchars($cour['borrow_date']); ?> | <?= htmlspecialchars($cour['borrow_return']); ?>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
-            </div>
+                </div>
             
-            <div class="emprunt-section">
-                <h3>Emprunts Retournés</h3>
-                <?php foreach($retours as $retour): ?>
-                    <div class="emprunt-card en-retard" style="text-transform:capitalize;">
-                        <?= htmlspecialchars($retour['student_name']); ?> | <?= htmlspecialchars($retour['book_title']); ?> <br>
-                        <?= htmlspecialchars($retour['borrow_date']); ?> | <?= htmlspecialchars($retour['borrow_return']); ?>
+                <div class="emprunt-section">
+                    <h3 style="color:green;">Emprunts Retournés</h3>
+                    <div class="emprunt-grid">
+                        <?php foreach($retours as $retour): ?>
+                            <div class="emprunt-card retourne" style="text-transform:capitalize;"> 
+                                <?= htmlspecialchars($retour['student_name']); ?> | <?= htmlspecialchars($retour['book_title']); ?> <br>
+                                <?= htmlspecialchars($retour['borrow_date']); ?> | <?= htmlspecialchars($retour['borrow_return']); ?>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
-            </div>
+                </div>
                 
 
                 <!-- Il ne reste plus qu'à styliser la section des emprunts, sinon ça marche -->
