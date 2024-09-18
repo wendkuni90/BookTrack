@@ -214,7 +214,7 @@
             <div class="team-grid">
                 
                 <div class="team-member">
-                    <img src="assets/img/picolo.jpg" alt="Latif NACANABO" />
+                    <img src="assets/img/pic2.jpg" alt="Latif NACANABO" />
                     <h4>Latif NACANABO</h4>
                     <p>FrontEnd</p>
                     <div class="social-icons">
